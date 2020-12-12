@@ -12,7 +12,7 @@
 PWD:=$(shell pwd)
 
 
-all:
+all: clean
 	mkdir --parents $(PWD)/build/Boilerplate.AppDir/teams
 	apprepo --destination=$(PWD)/build appdir boilerplate libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0
 	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
