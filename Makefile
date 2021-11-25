@@ -21,29 +21,22 @@ all: clean
 	echo 'export LD_LIBRARY_PATH=$${LD_LIBRARY_PATH}' >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo 'UUC_VALUE=`cat /proc/sys/kernel/unprivileged_userns_clone 2> /dev/null`' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo 'if [ -z "$${UUC_VALUE}" ]' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '    then' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '        exec $${APPDIR}/teams/teams --no-sandbox "$${@}"' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '    else' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '        exec $${APPDIR}/teams/teams "$${@}"' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo '    fi' >> $(PWD)/build/Boilerplate.AppDir/AppRun
-
+	echo 'exec $${APPDIR}/teams/teams $${@}' >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	
 	wget --output-document=$(PWD)/build/build.rpm https://packages.microsoft.com/yumrepos/ms-teams/teams-1.4.00.7556-1.x86_64.rpm
 	cd $(PWD)/build && rpm2cpio $(PWD)/build/build.rpm | cpio -idmv && cd ..
 
-	cp --force --recursive $(PWD)/build/usr/share/teams/* $(PWD)/build/Boilerplate.AppDir/teams
+	cp --force --recursive $(PWD)/build/usr/share/teams*/* $(PWD)/build/Boilerplate.AppDir/teams
 	rm -rf $(PWD)/build/usr/share/teams
 	cp --force --recursive $(PWD)/build/usr/share/* $(PWD)/build/Boilerplate.AppDir/share
 	
-	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop
-	cp --force $(PWD)/AppDir/*.desktop $(PWD)/build/Boilerplate.AppDir/
-	cp --force $(PWD)/AppDir/*.png $(PWD)/build/Boilerplate.AppDir/ || true
-	cp --force $(PWD)/AppDir/*.svg $(PWD)/build/Boilerplate.AppDir/ || true
+	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop   || true
+	rm --force $(PWD)/build/Boilerplate.AppDir/*.svg       || true
+	rm --force $(PWD)/build/Boilerplate.AppDir/*.png       || true
+
+	cp --force $(PWD)/AppDir/*.png       $(PWD)/build/Boilerplate.AppDir/      || true
+	cp --force $(PWD)/AppDir/*.desktop   $(PWD)/build/Boilerplate.AppDir/      || true
+	cp --force $(PWD)/AppDir/*.svg       $(PWD)/build/Boilerplate.AppDir/      || true
 
 
 	export ARCH=x86_64 && $(PWD)/bin/appimagetool.AppImage $(PWD)/build/Boilerplate.AppDir $(PWD)/Teams.AppImage
