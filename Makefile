@@ -33,7 +33,7 @@ all: clean
 	echo '    fi' >> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 	
-	wget --output-document=$(PWD)/build/build.rpm https://packages.microsoft.com/yumrepos/ms-teams/teams-1.3.00.25560-1.x86_64.rpm
+	wget --output-document=$(PWD)/build/build.rpm https://packages.microsoft.com/yumrepos/ms-teams/teams-1.4.00.7556-1.x86_64.rpm
 	cd $(PWD)/build && rpm2cpio $(PWD)/build/build.rpm | cpio -idmv && cd ..
 
 	cp --force --recursive $(PWD)/build/usr/share/teams/* $(PWD)/build/Boilerplate.AppDir/teams
