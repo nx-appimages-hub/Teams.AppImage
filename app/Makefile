@@ -18,8 +18,8 @@ all: clean init
 	mkdir --parents $(PWD)/build/Boilerplate.AppDir/teams
 	$(PWD)/bin/Apprepo.AppImage --destination=$(PWD)/build appdir boilerplate \
 	    libgdk-pixbuf2.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk2.0-0 \
-	    libreadline8 at-spi2-core libpango-1.0-0 libselinux1 libgtk-3-0 \
-		libwayland-cursor0
+	    libreadline8 at-spi2-core libpango-1.0-0 libgtk-3-0 \
+		libwayland-cursor0 libselinux1 
 
 	echo ''                                                     >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo ''                                                     >> $(PWD)/build/Boilerplate.AppDir/AppRun
@@ -29,7 +29,7 @@ all: clean init
 	echo ''                                                     >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo 'exec $${APPDIR}/teams/teams $${@}'                    >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	
-	wget --output-document=$(PWD)/build/build.rpm https://packages.microsoft.com/yumrepos/ms-teams/teams-1.4.00.7556-1.x86_64.rpm
+	wget --output-document=$(PWD)/build/build.rpm https://packages.microsoft.com/yumrepos/ms-teams/teams-1.5.00.10453-1.x86_64.rpm
 	cd $(PWD)/build && rpm2cpio $(PWD)/build/build.rpm | cpio -idmv && cd ..
 
 	cp --force --recursive $(PWD)/build/usr/share/teams*/* $(PWD)/build/Boilerplate.AppDir/teams
@@ -43,7 +43,6 @@ all: clean init
 	cp --force $(PWD)/AppDir/*.png       $(PWD)/build/Boilerplate.AppDir/      || true
 	cp --force $(PWD)/AppDir/*.desktop   $(PWD)/build/Boilerplate.AppDir/      || true
 	cp --force $(PWD)/AppDir/*.svg       $(PWD)/build/Boilerplate.AppDir/      || true
-
 
 	export ARCH=x86_64 && $(PWD)/bin/appimagetool.AppImage $(PWD)/build/Boilerplate.AppDir $(PWD)/Teams.AppImage
 	chmod +x $(PWD)/Teams.AppImage

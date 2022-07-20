@@ -23,7 +23,7 @@ GID=$(shell id -g)
 
 all: clean
 	$(DOCKER_COMPOSE) stop
-	$(DOCKER_COMPOSE) up --build --no-start
+	$(DOCKER_COMPOSE) build --no-cache
 	$(DOCKER_COMPOSE) up -d  "appimage"
 	$(DOCKER_COMPOSE) run    "appimage" make all
 	$(DOCKER_COMPOSE) run    "appimage" chown -R $(UID):$(GID) ./
