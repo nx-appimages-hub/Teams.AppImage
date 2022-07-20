@@ -20,3 +20,4 @@ RUN apt-get -y upgrade
 RUN apt-get install -y kmod make gcc wget gpg curl
 RUN apt-get install -y rpm2cpio cpio
 RUN apt-get install -y fuse file
+RUN apt-get update
