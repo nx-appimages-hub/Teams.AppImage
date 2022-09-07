@@ -13,6 +13,7 @@ PWD:=$(shell pwd)
 
 .PHONY: all
 
+# all: 
 all: clean init
 
 	mkdir --parents $(PWD)/build/Boilerplate.AppDir/teams
@@ -35,6 +36,7 @@ all: clean init
 	cp --force --recursive $(PWD)/build/usr/share/teams*/* $(PWD)/build/Boilerplate.AppDir/teams
 	rm -rf $(PWD)/build/usr/share/teams
 	cp --force --recursive $(PWD)/build/usr/share/* $(PWD)/build/Boilerplate.AppDir/share
+	cp --force --recursive  /usr/lib/x86_64-linux-gnu/libstdc++.* $(PWD)/build/Boilerplate.AppDir/lib
 	
 	rm --force $(PWD)/build/Boilerplate.AppDir/*.desktop   || true
 	rm --force $(PWD)/build/Boilerplate.AppDir/*.svg       || true
