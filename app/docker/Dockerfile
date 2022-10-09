@@ -9,7 +9,7 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -23,7 +23,6 @@ RUN apt-get install -y fuse file
 RUN apt-get update  --fix-missing
 
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN wget -q -O "-" https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
+RUN add-apt-repository "deb https://packages.microsoft.com/repos/ms-teams stable main" 
 RUN apt-get update -y
-RUN apt-get install -y gcc-4.9
-RUN apt-get upgrade -y libstdc++6
