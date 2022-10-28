@@ -26,3 +26,4 @@ RUN apt-get install -y software-properties-common
 RUN wget -q -O "-" https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
 RUN add-apt-repository "deb https://packages.microsoft.com/repos/ms-teams stable main" 
 RUN apt-get update -y
+RUN apt-get install -y teams
